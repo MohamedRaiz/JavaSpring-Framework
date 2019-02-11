@@ -1,10 +1,11 @@
 package com.in28minutes.spring.basics.springin5steps.scope;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+//DAO is supposed to get Data from Database
 
+@Repository
 public class PersonDAO {
 
 	@Autowired

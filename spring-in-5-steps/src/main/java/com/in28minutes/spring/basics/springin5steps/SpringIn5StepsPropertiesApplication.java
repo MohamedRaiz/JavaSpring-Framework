@@ -3,12 +3,16 @@ package com.in28minutes.spring.basics.springin5steps;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
-import com.in28minutes.spring.basics.springin5steps.basic.BinarySearchImpl;
+import com.in28minutes.spring.basics.springin5steps.properties.SomeExternalService;
 
 @Configuration
 @ComponentScan("com.in28minutes.spring.basics.springin5steps")
-public class SpringIn5StepsBasicApplication {
+
+//want to load in app.properties
+@PropertySource("classpath:app.properties")
+public class SpringIn5StepsPropertiesApplication {
 
 	public static void main(String[] args) {
 
@@ -23,18 +27,11 @@ public class SpringIn5StepsBasicApplication {
 		// Application Context would be managing all the beans. Thus, we need to get the
 		// beans from the app context.
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				SpringIn5StepsBasicApplication.class);
+				SpringIn5StepsPropertiesApplication.class);
 
-		BinarySearchImpl binarySearch = applicationContext.getBean(BinarySearchImpl.class);
-		BinarySearchImpl binarySearch1 = applicationContext.getBean(BinarySearchImpl.class);
+		SomeExternalService service = applicationContext.getBean(SomeExternalService.class);
 
-		System.out.println(binarySearch);
-		System.out.println(binarySearch1);
-
-		int result = binarySearch.binarySearch(new int[] { 12, 4, 6 }, 3); // first one is an array consisting of 12,4,6
-		// 3 is the number looking for.
-
-		System.out.println(result);
+		System.out.println(service.returnServiceURL());
 
 		applicationContext.close();
 
